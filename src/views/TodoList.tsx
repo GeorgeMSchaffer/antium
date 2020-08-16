@@ -1,4 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { ApolloProvider,gql,ApolloClient, InMemoryCache,useQuery  } from '@apollo/client';
+
 
 
 interface ITodoListProps{
@@ -11,15 +13,55 @@ interface ITodo {
 	dueDate?: any
 };
 
+const handleClick = ((event: MouseEvent) => {
+	event.preventDefault();
+	console.debug('\r\n ------ EVENT ------ ', event);
+
+});
+/*
+	const handleClick = function(event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) {
+			console.debug(`HANDLE CLICK EVENT`,event);
+			event.preventDefault();
+	}
+	*/
+	interface IUser {
+			_id : number,
+			email: string,
+			name: string,
+			password: string,
+			createdAt: Date
+			updatedAt: Date
+	}
+	interface IUsers {
+		[index: string]: IUser;
+	}
+	/*
+  const client = new ApolloClient({
+    uri: 'https://48p1r2roz4.sse.codesandbox.io',
+    cache: new InMemoryCache()
+	});
+*/	
+  const GET_TODOS = gql`
+	todos{
+		todos{
+		_id
+		title
+		description
+		dueDate
+		}
+	}
+	`;
 
 function TodoList(props: ITodoListProps) {
 	console.debug(`---- TODO LIST PROPS`, props);
-	const { todos } = props;
+	const { loading, error, data } = useQuery(GET_TODOS);
+	console.debug('TODO DATA',data);
+	//const { todos } = props;
 	return (
 		<div className={'root'}>
-				{(todos) ? (
+				{(data) ? (
 					<div>
-						{todos.map((todo:ITodo, idx: any) => {
+						{data.map((todo:ITodo, idx: any) => {
 							const { title, description, dueDate } = todo;
 							return (
 								<div key={`todo-${idx}`} className={'TodoListContainer'}>

@@ -26,7 +26,6 @@ const data = [{
   }];
 
 function App() {
-    
   return (
     <ApolloProvider client={client}>
       <div className="App">
@@ -70,7 +69,6 @@ interface IUser {
 }
 
 function Greet(props: gretterProps){
-  
   const {fname,lname,age} = props;
   return(
     <div>
