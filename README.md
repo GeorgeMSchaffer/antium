@@ -2,14 +2,21 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Creating my own starter kit with support for GKE built in.
 
-# Installing App
+At this time there is really two app 
+# Project Structure
+	Root 
+		-containers
+			-ui
+			-graphql
+
+# Installing UI Container Locally
 	## Clone Repository
 	## Install Dependencies
 	### `yarn`
 # Starting App
 	### `npm start'
-# Starting Graphql Backend
-	Navigate to ./containers/gql_express/
+# Installing graphql Container Locally
+	Navigate to <ROOT>/containers/graphql/
 	### `Yarn`
 
 # Starting MongoDB / PostGras

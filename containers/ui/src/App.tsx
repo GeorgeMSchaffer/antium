@@ -3,12 +3,34 @@ import { ApolloProvider,gql,ApolloClient, InMemoryCache,useQuery  } from '@apoll
 import './App.css';
 import TodoList from './views/TodoList';
 import TestView from './views/TestView';
+import { MuiThemeProvider, createMuiTheme,makeStyles,useTheme } from '@material-ui/core/styles';
+import { IconButton,Theme, Container,Button ,AppBar, Menu, MenuItem, Toolbar,Snackbar,Typography } from "@material-ui/core";
+import MenuIcon from '@material-ui/icons/Menu';
 
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import Container from 'react-bootstrap/Container';
-import ExchangeRates from '../src/views/ExchangeRates';
-console.debug('EXCHANGE RATE',ExchangeRates);
-// const client = ...
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {},
+  '@global': {
+    body: {
+      backgroundColor: theme.palette.background.paper,
+    },
+  },
+  title: {
+
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+  snackbar: {
+    [theme.breakpoints.down('xs')]: {
+      bottom: 90,
+    },
+  }
+}));
 
 const client = new ApolloClient({
   uri: 'https://48p1r2roz4.sse.codesandbox.io',
@@ -26,23 +48,34 @@ const data = [{
   }];
 
 function App() {
+  const theme = useTheme<Theme>();
+  const classes = useStyles(theme);
   return (
     <ApolloProvider client={client}>
-      <div className="App">
-        <header>
-          Put Menu Here
-        </header>
-          <Container className="p-3">
-            <Jumbotron>
-              <h1 className="header">
-                <TodoList todos={data}/>
-              </h1>
-              <h2>Exchange Rates</h2>
-              <TodoList/>
-            </Jumbotron>
-          </Container>
-      </div>
-      </ApolloProvider>
+      <MuiThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <header>
+            <Toolbar> Tool bar </Toolbar>
+          </header>
+          <AppBar position="static">
+            <Toolbar>
+              <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" className={classes.title}>
+                News
+              </Typography>
+              <Button color="inherit">Login</Button>
+            </Toolbar>
+          </AppBar>
+            <Container>
+                <h1 className="header">
+                  <TodoList todos={data}/>
+                </h1>
+            </Container>
+          </div>
+        </MuiThemeProvider>
+     </ApolloProvider>
   );
 }
 // later...

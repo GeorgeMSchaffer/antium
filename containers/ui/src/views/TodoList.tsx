@@ -42,7 +42,7 @@ const handleClick = ((event: MouseEvent) => {
 	});
 */	
   const GET_TODOS = gql`
-	todos{
+	query getTodos{
 		todos{
 		_id
 		title
