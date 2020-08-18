@@ -1,36 +1,39 @@
 import React,{useEffect,useContext,useState,MouseEvent} from 'react';
 import { ApolloProvider,gql,ApolloClient, InMemoryCache,useQuery  } from '@apollo/client';
 import './App.css';
-import TodoList from './views/TodoList';
-import TestView from './views/TestView';
-import { MuiThemeProvider, createMuiTheme,makeStyles,useTheme } from '@material-ui/core/styles';
-import { IconButton,Theme, Container,Button ,AppBar, Menu, MenuItem, Toolbar,Snackbar,Typography } from "@material-ui/core";
-import MenuIcon from '@material-ui/icons/Menu';
+import TodoList from './components/TodoList';
+import TestView from './components/TestView';
+import { MuiThemeProvider, createMuiTheme,makeStyles,useTheme ,createStyles} from '@material-ui/core/styles';
+import { IconButton,Theme, Container,Button ,AppBar, Menu, MenuItem,Drawer, Toolbar,Snackbar,Typography,Divider,List,ListItemIcon,ListItemText,CssBaseline,Paper } from "@material-ui/core";
+import Sidebar from './views/Sidebar';
+import Header from './views/Header';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {},
-  '@global': {
-    body: {
-      backgroundColor: theme.palette.background.paper,
+const drawerWidth = 240;
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
     },
-  },
-  title: {
-
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  fab: {
-    position: 'absolute',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-  snackbar: {
-    [theme.breakpoints.down('xs')]: {
-      bottom: 90,
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
     },
+    appBarShift: {
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    hide: {
+      display: 'none',
+    }
   }
-}));
+));
 
 const client = new ApolloClient({
   uri: 'https://48p1r2roz4.sse.codesandbox.io',
@@ -48,32 +51,22 @@ const data = [{
   }];
 
 function App() {
-  const theme = useTheme<Theme>();
-  const classes = useStyles(theme);
+  const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
   return (
     <ApolloProvider client={client}>
       <MuiThemeProvider theme={theme}>
-        <div className={classes.root}>
+      <Paper className={classes.root}>
           <header>
             <Toolbar> Tool bar </Toolbar>
           </header>
-          <AppBar position="static">
-            <Toolbar>
-              <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" className={classes.title}>
-                News
-              </Typography>
-              <Button color="inherit">Login</Button>
-            </Toolbar>
-          </AppBar>
-            <Container>
-                <h1 className="header">
-                  <TodoList todos={data}/>
-                </h1>
-            </Container>
-          </div>
+          <Sidebar open={open} width={drawerWidth}>drawerWidth</Sidebar>
+            <h1 className="header">
+              <TodoList todos={data}/>
+            </h1>
+        </Paper>
         </MuiThemeProvider>
      </ApolloProvider>
   );
