@@ -54,8 +54,9 @@ const handleClick = ((event: MouseEvent) => {
 
 function TodoList(props: ITodoListProps) {
 	console.debug(`---- TODO LIST PROPS`, props);
-	const { loading, error, data } = useQuery(GET_TODOS);
-	console.debug('TODO DATA',data);
+	//const { loading, error, data } = useQuery(GET_TODOS);
+	let data:any= [];
+	//console.debug('TODO DATA',data);
 	//const { todos } = props;
 	return (
 		<div className={'root'}>

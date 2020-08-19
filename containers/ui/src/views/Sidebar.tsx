@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,MouseEvent,SyntheticEvent} from 'react';
 import { MuiThemeProvider, createMuiTheme,makeStyles,useTheme ,createStyles} from '@material-ui/core/styles';
 import { IconButton,Theme, Container,Button ,AppBar, Menu, MenuItem,Drawer, Toolbar,Snackbar,Typography,Divider,List,ListItemIcon,ListItemText,CssBaseline,Paper } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
@@ -18,68 +18,67 @@ const Sidebar = (props: any) => {
     let {width} = props;
     const [open, setOpen] = useState<boolean | undefined>(props.open);
     const useStyles = makeStyles((theme: Theme) =>
-        createStyles({
-            root: {
-            display: 'flex',
-            },
-            appBar: {
-            zIndex: theme.zIndex.drawer + 1,
-            transition: theme.transitions.create(['width', 'margin'], {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.leavingScreen,
-            }),
-            },
-            appBarShift: {
-            marginLeft: width,
-            width: `calc(100% - ${width}px)`,
-            transition: theme.transitions.create(['width', 'margin'], {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            },
-            menuButton: {
-            marginRight: 36,
-            },
-            hide: {
-            display: 'none',
-						},
-						drawerClose:{
-
-						},
-						drawerOpen:{
-
-						},
-						toolbar:{
-
-						}
-        })
-    );
-	  const handleDrawerOpen = <T>(evt: T): T => {
     
+    createStyles({
+      root:{
+
+      },
+      drawer: {
+        width: width,
+        flexShrink: 0,
+      },
+      drawerPaper: {
+        width: width,
+      },
+      drawerHeader: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: theme.spacing(0, 1),
+        // necessary for content to be below app bar
+        ...theme.mixins.toolbar,
+        justifyContent: 'flex-end',
+      },
+      content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        transition: theme.transitions.create('margin', {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+        marginLeft: -width,
+      },
+      contentShift: {
+        transition: theme.transitions.create('margin', {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+        marginLeft: 0,
+      },
+    }),
+  );
+	  const handleDrawerClick = (evt: MouseEvent) => {
+      console.debug('--- SETTING OPEN FROM',open,'TO',!open);
+      setOpen(!open);
     };
   
-    const handleDrawerClose = <T>(evt: T): T => {
-      
-    };
-
     const classes = useStyles();
     const theme = useTheme();  
     return (
         <Drawer
-            variant="permanent"
-            classes={{
-              paper: clsx({
-                //[classes.drawerOpen]: open,
-                //[classes.drawerClose]: !open,
-              }),
-            }}
-          >
-            <div className={classes.toolbar}>
-              <IconButton onClick={handleDrawerClose}>
+          className={classes.drawer}
+          variant="persistent"
+          anchor="left"
+          open={open}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+            <div className={classes.root}>
+              <IconButton onClick={handleDrawerClick}>
                 {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
               </IconButton>
             </div>
-            <Divider />
+          <Divider />
             <List>
               {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                 <ListItem button key={text}>
