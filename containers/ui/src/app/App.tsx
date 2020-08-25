@@ -1,8 +1,8 @@
 import React,{useEffect,useContext,useState,MouseEvent} from 'react';
 import { ApolloProvider,gql,ApolloClient, InMemoryCache,useQuery  } from '@apollo/client';
 import '../App.css';
-import TodoList from '../components/TodoList';
-import TestView from '../components/TestView';
+import TodoList from '../features/todoList/TodoList';
+
 import { MuiThemeProvider, createMuiTheme,makeStyles,useTheme ,createStyles} from '@material-ui/core/styles';
 import { Theme, Container,Button ,AppBar, Menu, MenuItem,Drawer, Toolbar,Snackbar,Typography,Divider,List,ListItemIcon,ListItemText,CssBaseline,Paper } from "@material-ui/core";
 import IconButton from '@material-ui/core/IconButton';
@@ -18,8 +18,27 @@ import AddTodo from '../features/todoList/AddTodo';
 const width = 240;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    paper: {
+      width: 'auto',
+      minWidth: '80%',
+      marginLeft: theme.spacing(3),
+      marginRight: theme.spacing(3),
+      [theme.breakpoints.up(620 + theme.spacing(6))]: {
+        width: 400,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      },
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(
+        3
+      )}px`,
+    },
     root: {
       display: 'flex',
+      padding: '10px 20px'
     },
     appBar: {
       transition: theme.transitions.create(['margin', 'width'], {
@@ -40,6 +59,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     hide: {
       display: 'none',
+    },
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: `100%`,
     },
   }),
 );
@@ -63,7 +89,9 @@ const data = [{
 
 function App() {
   const classes = useStyles();
-  const theme = useTheme();
+  console.debug('\r\n ---- CLASSES ------- ',classes);
+  const theme:Theme = useTheme();
+  console.debug('\r\n ------ THEME ------',theme);
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = (evt:MouseEvent)=>{
     setOpen(!open);
@@ -71,16 +99,17 @@ function App() {
 
   return (
     <MuiThemeProvider theme={theme}>
-      <Paper className={classes.root}>
+    <Paper className={classes.paper}>
+    <div className={classes.container}>
           <header>
             <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                className={clsx(classes.menuButton, open && classes.hide)}
+              >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
@@ -91,8 +120,9 @@ function App() {
           <Sidebar open={open} width={width}> SIDE BAR STUFF HERE</Sidebar>
             <h1 className="header">
               <AddTodo/>
-              <TodoList todos={data}/>
+              <TodoList/>
             </h1>
+            </div>
         </Paper>
       </MuiThemeProvider>
   );

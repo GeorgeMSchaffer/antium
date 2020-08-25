@@ -1,11 +1,13 @@
 import React from 'react'
 
 interface TodoProps {
-  completed: boolean,
-  text: string
+  completed?: boolean,
+  text: string,
+  description?: string,
+  dueDate?: Date
 }
 
-export default function TodoListItem({ completed, text }: TodoProps) {
+export default function TodoListItem({ completed, text,description,dueDate }: TodoProps) {
   return (
     <li
       style={{
@@ -13,6 +15,10 @@ export default function TodoListItem({ completed, text }: TodoProps) {
       }}
     >
       {text}
+      <hr/>
+      {description}
+      <hr/>
+      {dueDate}
     </li>
   )
 }
