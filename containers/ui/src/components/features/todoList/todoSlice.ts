@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AppThunk, AppDispatch } from '../../app/store';
+import { AppThunk, AppDispatch } from '../../../app/store';
 import { ITodo } from './types';
 
 const initialState : ITodo[] = [];

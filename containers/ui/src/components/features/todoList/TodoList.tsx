@@ -1,7 +1,7 @@
 import React from 'react'
 import TodoListItem from './TodoListItem'
-import { RootState } from '../../app/rootReducer';
-import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../../app/rootReducer';
+ import { useSelector, useDispatch } from 'react-redux';
 import { toggleTodo } from './todoSlice';
 import {ITodo} from './types'
 import {Input,TextField,TextareaAutosize} from '@material-ui/core';

@@ -1,23 +1,23 @@
 import React,{useEffect,useContext,useState,MouseEvent} from 'react';
 import { HashRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import TodoList from '../features/todoList/TodoList';
+import TodoList from '../components/features/todoList/TodoList';
 import { MuiThemeProvider, createMuiTheme,makeStyles,useTheme ,createStyles} from '@material-ui/core/styles';
-import { Theme,Grid,Box, Container,Button ,AppBar, Menu, MenuItem,Drawer, Toolbar,Snackbar,Typography,Divider,List,ListItemIcon,ListItemText,CssBaseline,Paper } from "@material-ui/core";
+import { Theme,Grid,Box, Container,Button ,Card,AppBar, Menu, MenuItem,Drawer, Toolbar,Snackbar,Typography,Divider,List,ListItemIcon,ListItemText,CssBaseline,Paper } from "@material-ui/core";
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
-import Sidebar from '../views/Sidebar';
 import Header from '../views/Header';
 import { Provider } from 'react-redux';
 import store from './store';
-import AddTodo from '../features/todoList/AddTodo';
+import AddTodo from '../components/features/todoList/AddTodo';
 import AutoGrid from '../demos/AutoGrid';
 import '../App.css';
 import NestedGridDemo from '../demos/NestedGrid';
+//import Dashboard from '../demos/Dashboard/Dashboard';
 
 const width = 240;
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
+  createStyles(   {
     paper: {
       width: 'auto',
       minWidth: '80%',
@@ -41,18 +41,18 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: '10px 20px'
     },
     appBar: {
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
+      // transition: theme.transitions.create(['margin', 'width'], {
+      //   easing: theme.transitions.easing.sharp,
+      //   duration: theme.transitions.duration.leavingScreen,
+      // }),
     },
     appBarShift: {
       width: `calc(100% - ${width}px)`,
-      marginLeft: width,
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
+       marginLeft: width,
+       transition: theme.transitions.create(['margin', 'width'], {
+         easing: theme.transitions.easing.easeOut,
+         duration: theme.transitions.duration.enteringScreen,
+       }),
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -61,15 +61,18 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'none',
     },
     container: {
-      display: 'flex',
-      border: '1px dashed grey',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: `100%`,
+      // display: 'flex',
+     border: '1px dashed blue',
+      // flexDirection: 'column',
+      // alignItems: 'center',
+      // justifyContent: 'center',
+       height: `100%`,
+       width:'100%'
     },
     box: {
-      border:'1px solid black'
+      border: '1px solid black',
+   //   width: '100%',
+    //  margin: '20px'
     }
   }),
 );
@@ -104,33 +107,35 @@ function App() {
   return (
 		<Router>
       <MuiThemeProvider theme={theme}>
-        <Container maxWidth="sm" className={classes.container}>
-          <h2>Container</h2>
-          <Box my={4} className={classes.box}>
-            <h2>Box</h2>
-							<header>
-								<Toolbar>
-									<IconButton
-										color="inherit"
-										aria-label="open drawer"
-										onClick={handleDrawerOpen}
-										edge="start"
-										className={clsx(classes.menuButton, open && classes.hide)}>
-										<MenuIcon />
-									</IconButton>
-									<Typography variant="h6" noWrap>
-										Persistent drawer
-									</Typography>
-								</Toolbar>
-							</header>
-							<Sidebar open={open} width={width}>
-								{' '}
-								SIDE BAR STUFF HERE
-							</Sidebar>
-							<h1 className="header">
-								<AddTodo />
+        <Grid container spacing={10} style={{padding: '24px'}}
+></Grid>
+				<Container maxWidth={'lg'} className={classes.container}>
+					<h2>Container</h2>
+					<Box className={classes.box}>
+						<AppBar position={'static'}>
+							<Toolbar>
+								<IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerOpen}>
+									<MenuIcon />
+								</IconButton>
+							</Toolbar>
+						</AppBar>
+						{/* 						<Sidebar open={open} width={width}>
+							SIDE BAR STUFF HERE
+						</Sidebar> */}
+						<h1 className="header">Header</h1>
+						<AddTodo />
+						<Grid item xs={12} sm={6} md={3}>
+							<Card>
 								<TodoList />
-							</h1>
+							</Card>
+						</Grid>
+						<Grid item xs={12} sm={6} md={3}>
+							<Card>THIS IS CARD 2</Card>
+						</Grid>
+						:
+						<Grid item xs={12} sm={6} md={3}>
+							<Card>THIS IS CARD 3</Card>
+						</Grid>
 					</Box>
 				</Container>
 			</MuiThemeProvider>
