@@ -1,5 +1,7 @@
 export interface ITodo {
   id: string,
   completed: boolean
-  text: string, 
+  title: string, 
+  description?: string,
+  dueDate?: Date 
 }

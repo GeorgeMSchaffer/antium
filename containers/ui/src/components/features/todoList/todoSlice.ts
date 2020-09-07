@@ -30,7 +30,9 @@ export const addTodo = (
     const newTodo : ITodo = {
         id: Math.random().toString(36).substr(2, 9), // https://gist.github.com/gordonbrander/2230317,
         completed: false,
-        text: text,
+        title: '',
+        description: '',
+        dueDate: undefined
     }
 
     dispatch(todoSlice.actions.addTodo(newTodo))

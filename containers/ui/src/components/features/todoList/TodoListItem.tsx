@@ -2,23 +2,23 @@ import React from 'react'
 
 interface TodoProps {
   completed?: boolean,
-  text: string,
+  title: string,
   description?: string,
   dueDate?: Date
 }
 
-export default function TodoListItem({ completed, text,description,dueDate }: TodoProps) {
+export default function TodoListItem({ completed, title,description,dueDate }: TodoProps) {
   return (
     <li
       style={{
         textDecoration: completed ? 'line-through' : 'none'
       }}
     >
-      {text}
+      {title}
       <hr/>
       {description}
       <hr/>
-      {dueDate}
+      {dueDate}x
     </li>
   )
 }

@@ -1,7 +1,7 @@
 import React,{useEffect,useContext,useState,MouseEvent} from 'react';
 import { HashRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import TodoList from '../components/features/todoList/TodoList';
-import { MuiThemeProvider, createMuiTheme,makeStyles,useTheme ,createStyles} from '@material-ui/core/styles';
+import {ThemeProvider, createMuiTheme,makeStyles,useTheme ,createStyles} from '@material-ui/core/styles';
 import { Theme,Grid,Box, Container,Button ,Card,AppBar, Menu, MenuItem,Drawer, Toolbar,Snackbar,Typography,Divider,List,ListItemIcon,ListItemText,CssBaseline,Paper } from "@material-ui/core";
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -13,12 +13,17 @@ import AddTodo from '../components/features/todoList/AddTodo';
 import AutoGrid from '../demos/AutoGrid';
 import '../App.css';
 import NestedGridDemo from '../demos/NestedGrid';
+import UseReducerExample from '../demos/UseReducerExample';
+//import PictureCard from '../demos/PictureCard'
 //import Dashboard from '../demos/Dashboard/Dashboard';
 
 const width = 240;
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles(   {
+const useStyles = makeStyles((theme: Theme) => {
+  console.debug(` \r\n ------ THEME ----- \r\n`, theme);
+  return createStyles({
     paper: {
+      /*
+      border: '1px dotted green',
       width: 'auto',
       minWidth: '80%',
       marginLeft: theme.spacing(3),
@@ -35,10 +40,11 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(
         3
       )}px`,
+      */
     },
     root: {
       display: 'flex',
-      padding: '10px 20px'
+      //padding: '10px 20px'
     },
     appBar: {
       // transition: theme.transitions.create(['margin', 'width'], {
@@ -48,11 +54,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     appBarShift: {
       width: `calc(100% - ${width}px)`,
-       marginLeft: width,
-       transition: theme.transitions.create(['margin', 'width'], {
-         easing: theme.transitions.easing.easeOut,
-         duration: theme.transitions.duration.enteringScreen,
-       }),
+      marginLeft: width,
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -61,20 +67,21 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'none',
     },
     container: {
-      // display: 'flex',
-     border: '1px dashed blue',
+      display: 'flex',
+      //border: '1px dashed blue',
       // flexDirection: 'column',
-      // alignItems: 'center',
-      // justifyContent: 'center',
-       height: `100%`,
-       width:'100%'
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: `100%`,
+      width: '100%'
     },
     box: {
       border: '1px solid black',
-   //   width: '100%',
-    //  margin: '20px'
+      width: '100%',
+      //  margin: '20px'
     }
-  }),
+  })
+}
 );
 
 /*
@@ -103,48 +110,91 @@ function App() {
   const handleDrawerOpen = (evt: MouseEvent) => {
     setOpen(!open);
   };
-
+  /*
+    return (
+      <Router>
+        <MuiThemeProvider theme={theme}>
+          <Grid container spacing={10} style={{padding: '24px'}}
+  ></Grid>
+          <Container maxWidth={'lg'} className={classes.container}>
+            <h2>Container</h2>
+            <Box className={classes.box}>
+              <AppBar position={'static'}>
+                <Toolbar>
+                  <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerOpen}>
+                    <MenuIcon />
+                  </IconButton>
+                </Toolbar>
+              </AppBar>
+              {/* 						<Sidebar open={open} width={width}>
+                SIDE BAR STUFF HERE
+              </Sidebar> 
+              <h1 className="header">Header</h1>
+              <AddTodo />
+              <Grid item xs={12} sm={6} md={3}>
+                <Card>
+                  <TodoList />
+                </Card>
+              </Grid>
+              <Grid item xs={12} sm={6} md={3}>
+                <Card>THIS IS CARD 2
+                 <UseReducerExample/>
+                </Card>
+              </Grid>
+              :
+              <Grid item xs={12} sm={6} md={3}>
+                <Card>THIS IS CARD 3</Card>
+              </Grid>
+            </Box>
+          </Container>
+        </MuiThemeProvider>
+        <Route path="/autogrid" exact component={AutoGrid} />
+        <Route path="/muigrid" component={NestedGridDemo} />
+      </Router>
+    );
+  }
+  
+  */
   return (
-		<Router>
-      <MuiThemeProvider theme={theme}>
-        <Grid container spacing={10} style={{padding: '24px'}}
-></Grid>
-				<Container maxWidth={'lg'} className={classes.container}>
-					<h2>Container</h2>
-					<Box className={classes.box}>
-						<AppBar position={'static'}>
-							<Toolbar>
-								<IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerOpen}>
-									<MenuIcon />
-								</IconButton>
-							</Toolbar>
-						</AppBar>
-						{/* 						<Sidebar open={open} width={width}>
-							SIDE BAR STUFF HERE
-						</Sidebar> */}
-						<h1 className="header">Header</h1>
-						<AddTodo />
-						<Grid item xs={12} sm={6} md={3}>
-							<Card>
-								<TodoList />
-							</Card>
-						</Grid>
-						<Grid item xs={12} sm={6} md={3}>
-							<Card>THIS IS CARD 2</Card>
-						</Grid>
-						:
-						<Grid item xs={12} sm={6} md={3}>
-							<Card>THIS IS CARD 3</Card>
-						</Grid>
-					</Box>
-				</Container>
-			</MuiThemeProvider>
-			<Route path="/autogrid" exact component={AutoGrid} />
-			<Route path="/muigrid" component={NestedGridDemo} />
-		</Router>
+    <Container maxWidth={'xl'} className={classes.container}>
+      <Paper>
+				<AppBar position={'static'}>
+					<Toolbar>
+						<IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerOpen}>
+							<MenuIcon />
+						</IconButton>
+					</Toolbar>
+        </AppBar>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>xs=12</Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper className={classes.paper}>
+              <TodoList/>
+
+            </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper className={classes.paper}><AddTodo /></Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper className={classes.paper}>xs=3</Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper className={classes.paper}>xs=3</Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper className={classes.paper}>xs=3</Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper className={classes.paper}>xs=3</Paper>
+          </Grid>
+        </Grid>
+     	</Paper>
+		</Container>
 	);
 }
-
   // later...
 export default App;
 

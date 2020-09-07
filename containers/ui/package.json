@@ -52,8 +52,76 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": true,
+    "printWidth": 120,
+    "bracketSpacing": true,
+    "trailingComma": "all",
+    "arrowParens": "always",
+    "jsxBracketSameLine": true,
+    "semi": true,
+    "singleQuote": true
+  },
   "eslintConfig": {
-    "extends": "react-app"
+    "plugins": [
+      "prettier",
+      "react-hooks"
+    ],
+    "extends": [
+      "airbnb",
+      "prettier"
+    ],
+    "env": {
+      "es6": true,
+      "browser": true,
+      "node": true
+    },
+    "globals": {
+      "alert": true,
+      "self": true,
+      "jest": true,
+      "describe": true,
+      "it": true,
+      "afterAll": true,
+      "expect": true
+    },
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true,
+        "spread": true,
+        "modules": true,
+        "blockBindings": true,
+        "destructuring": true,
+        "arrowFunctions": true
+      }
+    },
+    "settings": {},
+    "rules": {
+      "semi": "error",
+      "no-console": "off",
+      "no-alert": "off",
+      "no-multi-spaces": [
+        "warn",
+        {
+          "ignoreEOLComments": true
+        }
+      ],
+      "quotes": [
+        "warn",
+        "double",
+        {
+          "avoidEscape": true,
+          "allowTemplateLiterals": true
+        }
+      ],
+      "react/jsx-filename-extension": "off",
+      "react/prefer-stateless-function": "off",
+      "react/prop-types": "off",
+      "react/jsx-one-expression-per-line": "off",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
+    }
   },
   "browserslist": {
     "production": [
@@ -66,5 +134,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-component-log": "^1.0.0"
   }
 }
