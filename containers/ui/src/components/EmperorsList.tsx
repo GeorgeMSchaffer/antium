@@ -1,13 +1,14 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { ApolloProvider,gql,ApolloClient, InMemoryCache,useQuery  } from '@apollo/client';
+import { Grid,Container } from '@material-ui/core';
 
 
 
-interface ITodoListProps{
-	todos?: ITodo[]
+interface IEmperorListProps{
+	emperors?: IEmperor[]
 }
 
-interface ITodo {
+interface IEmperor {
 	title: string
 	description: string
 	dueDate?: any
@@ -42,8 +43,8 @@ const handleClick = ((event: MouseEvent) => {
 	});
 */	
   const GET_TODOS = gql`
-	query getTodos{
-		todos{
+	query getEmperors{
+		emperors{
 		_id
 		title
 		description
@@ -52,34 +53,34 @@ const handleClick = ((event: MouseEvent) => {
 	}
 	`;
 
-function TodoList(props: ITodoListProps) {
+function EmperorList(props: IEmperorListProps) {
 	console.debug(`---- TODO LIST PROPS`, props);
 	//const { loading, error, data } = useQuery(GET_TODOS);
 	let data:any= [];
 	//console.debug('TODO DATA',data);
-	//const { todos } = props;
+	//const { emperors } = props;
 	return (
-		<div className={'root'}>
+		<Grid container className={'root'}>
 				{(data) ? (
-					<div>
-						{data.map((todo:ITodo, idx: any) => {
-							const { title, description, dueDate } = todo;
+					<Grid>
+						{data.map((emperor:IEmperor, idx: any) => {
+							const { title, description, dueDate } = emperor;
 							return (
-								<div key={`todo-${idx}`} className={'TodoListContainer'}>
-									<div id={`${idx}`}>{title}</div>
-									<div>{description}</div>
-									<div>{dueDate}</div>
-								</div>
+								<Grid key={`emperor-${idx}`} className={'EmperorListContainer'}>
+									<Grid id={`${idx}`}>{title}</Grid>
+									<Grid>{description}</Grid>
+									<Grid>{dueDate}</Grid>
+								</Grid>
 							)
 						})}
-					</div>
+					</Grid>
 				) : (<div>Loading...</div>)
 			}
-		</div>
+		</Grid>
 	);
 }
 // later...
-export default TodoList;
+export default EmperorList;
 
 
  //#endregion

@@ -20,7 +20,7 @@ function UseReducerExample(props) {
 		<form onSubmit = {handleSubmit}>
 			<TextField name={'name'} ref={nameInputRef} id={'name'} value={name} onChange={handleChange} />
 			<div>Name : {name}</div>
-			<Button type="submit">Add Todo</Button> 
+			<Button type="submit">Add Emperor</Button> 
 		</form>
 	)
 }

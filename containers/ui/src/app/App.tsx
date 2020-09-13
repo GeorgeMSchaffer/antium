@@ -1,6 +1,6 @@
 import React,{useEffect,useContext,useState,MouseEvent} from 'react';
 import { HashRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import TodoList from '../components/features/todoList/TodoList';
+import EmperorList from '../components/features/Emperors/EmperorList';
 import {ThemeProvider, createMuiTheme,makeStyles,useTheme ,createStyles} from '@material-ui/core/styles';
 import { Theme,Grid,Box, Container,Button ,Card,AppBar, Menu, MenuItem,Drawer, Toolbar,Snackbar,Typography,Divider,List,ListItemIcon,ListItemText,CssBaseline,Paper } from "@material-ui/core";
 import IconButton from '@material-ui/core/IconButton';
@@ -9,7 +9,7 @@ import clsx from 'clsx';
 import Header from '../views/Header';
 import { Provider } from 'react-redux';
 import store from './store';
-import AddTodo from '../components/features/todoList/AddTodo';
+import AddEmperor from '../components/features/Emperors/AddEmperor';
 import AutoGrid from '../demos/AutoGrid';
 import '../App.css';
 import NestedGridDemo from '../demos/NestedGrid';
@@ -21,6 +21,10 @@ const width = 240;
 const useStyles = makeStyles((theme: Theme) => {
   console.debug(` \r\n ------ THEME ----- \r\n`, theme);
   return createStyles({
+    containerGrid: {
+      border: '1px solid red',
+      backgroundColor:'green'
+    },
     paper: {
       /*
       border: '1px dotted green',
@@ -67,13 +71,12 @@ const useStyles = makeStyles((theme: Theme) => {
       display: 'none',
     },
     container: {
-      display: 'flex',
-      //border: '1px dashed blue',
+      border: '1px dashed blue',
       // flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'center',
-      height: `100%`,
-      width: '100%'
+      //justifyContent: 'center',
+      //height: `100%`,
+     // width: '100%'      
     },
     box: {
       border: '1px solid black',
@@ -130,10 +133,10 @@ function App() {
                 SIDE BAR STUFF HERE
               </Sidebar> 
               <h1 className="header">Header</h1>
-              <AddTodo />
+              <AddEmperor />
               <Grid item xs={12} sm={6} md={3}>
                 <Card>
-                  <TodoList />
+                  <EmperorList />
                 </Card>
               </Grid>
               <Grid item xs={12} sm={6} md={3}>
@@ -156,42 +159,26 @@ function App() {
   
   */
   return (
-    <Container maxWidth={'xl'} className={classes.container}>
-      <Paper>
+		<Container fixed maxWidth={'xl'} className={classes.container}>
+			<Grid container spacing={5}>
 				<AppBar position={'static'}>
 					<Toolbar>
 						<IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerOpen}>
 							<MenuIcon />
 						</IconButton>
 					</Toolbar>
-        </AppBar>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>xs=12</Paper>
-          </Grid>
-          <Grid item xs={6}>
-            <Paper className={classes.paper}>
-              <TodoList/>
-
-            </Paper>
-          </Grid>
-          <Grid item xs={6}>
-            <Paper className={classes.paper}><AddTodo /></Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper className={classes.paper}>xs=3</Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper className={classes.paper}>xs=3</Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper className={classes.paper}>xs=3</Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper className={classes.paper}>xs=3</Paper>
-          </Grid>
-        </Grid>
-     	</Paper>
+				</AppBar>
+				<Grid container={true} spacing={5} xs={12}>
+					<Grid item xs={12} md={6}>
+						<h2>Emperor List</h2>
+						<EmperorList />
+					</Grid>
+					<Grid item xs={12} md={6}>
+						<h2>Add Emperor</h2>
+						<AddEmperor />
+					</Grid>
+				</Grid>
+			</Grid>
 		</Container>
 	);
 }
