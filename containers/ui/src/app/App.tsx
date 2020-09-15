@@ -5,17 +5,19 @@ import {ThemeProvider, createMuiTheme,makeStyles,useTheme ,createStyles} from '@
 import { Theme,Grid,Box, Container,Button ,Card,AppBar, Menu, MenuItem,Drawer, Toolbar,Snackbar,Typography,Divider,List,ListItemIcon,ListItemText,CssBaseline,Paper } from "@material-ui/core";
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import clsx from 'clsx';
-import Header from '../views/Header';
-import { Provider } from 'react-redux';
-import store from './store';
 import AddEmperor from '../components/features/Emperors/AddEmperor';
-import AutoGrid from '../demos/AutoGrid';
 import '../App.css';
-import NestedGridDemo from '../demos/NestedGrid';
+import { Form } from '../demos/Form';
 import UseReducerExample from '../demos/UseReducerExample';
+import UseContextExample from '../demos/UseContextExample';
+‍import { UserContext, CompanyContext } from './appContexts'; 
+
 //import PictureCard from '../demos/PictureCard'
 //import Dashboard from '../demos/Dashboard/Dashboard';
+import React, { useContext } from 'react';
+‍
+const exportconst UserContext = React.createContext({});
+const CompanyContext = React.createContext({});
 
 const width = 240;
 const useStyles = makeStyles((theme: Theme) => {
@@ -168,6 +170,19 @@ function App() {
 						</IconButton>
 					</Toolbar>
 				</AppBar>
+				<Grid container={true} spacing={5} xs={12}>
+					<Grid item xs={12} md={6}>
+						<Form action={'GET'} />
+					</Grid>
+				</Grid>
+				<Grid container={true} spacing={5} xs={12}>
+					<Typography variant={'caption'}>Use Context Example</Typography>
+					<UseContextExample />
+				</Grid>
+				<Grid container={true} spacing={5} xs={12}>
+					<Typography variant={'caption'}>Use Reducer Example</Typography>
+					<UseReducerExample />
+				</Grid>
 				<Grid container={true} spacing={5} xs={12}>
 					<Grid item xs={12} md={6}>
 						<h2>Emperor List</h2>

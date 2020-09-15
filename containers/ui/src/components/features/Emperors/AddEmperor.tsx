@@ -7,8 +7,16 @@ import { Grid, Paper, Input, InputLabel, TextField, Button, FormControl, FormCon
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import addDays from 'date-fns/addDays';
 import format from 'date-fns/format';
+interface IFormProps {
+  /* The http path that the form will be posted to */
+  action: string;
+}
 
-export default function Addemperor(): JSX.Element {
+export interface IValues {
+  /* Key value pairs for all the field values with key being the field name */
+  [key: string]: any;
+}
+
 
 	const useStyles = makeStyles((theme: Theme) =>
 		createStyles({
@@ -40,29 +48,18 @@ export default function Addemperor(): JSX.Element {
 		bio: 'The Bio'
 	});
 
-    function handleChange(e: ChangeEvent<HTMLInputElement>) {
-			console.debug(` ---- TARGET ----- `, e);
-			debugger;
-        //setText(e.target.value);
-    }
 
     function onFormChange(evt: ChangeEvent<HTMLFormElement | HTMLFormElement>) {
         console.debug('\r\n ------ ON FORM CHANGE ------ \r\n', evt);
     }
-
-
-		const selectedDate = (evt:any)=> {
-			console.debug(`ON DATE SELECT`, evt);
-		}
-		const handleDateChange = (evt: any) => {
-			console.debug(`ON DATE CHANGE`, evt);
-			//setSelectedDate(evt.target.value);
-		};
 	
 	const onTextFieldChange = (evt: any) => {
 		const { id, value } = evt.target;
-		console.debug(`FIELD ID: ${id} FIELD VALUE ${value}`);
-		debugger;
+		console.debug(`UPDATING ID: ${id} FIELD VALUE ${value}`,emperor);
+		setAttribute({
+			...emperor,
+			[id]: value
+		});
 	};
 	
 		const onDateFieldChange = (evt: any) => {
@@ -71,92 +68,95 @@ export default function Addemperor(): JSX.Element {
 		const onCreateDefaultEmperors = (e: any) => {
 			console.debug('----- onCreateDefaultEmperors', e);
 		};
-		function handleSubmit(e: ChangeEvent<HTMLFormElement | HTMLFormElement>) {
+		function handleSubmit(e: MouseEvent) {
 			console.debug('----- ADD TODO SUBMIT EVENT', e);
-			debugger;
 			e.preventDefault();
+	};
+		export default function AddEmperor(): JSX.Element {
+			return (
+				<form>
+					<Grid container className={classes.formGrid}>
+						<Grid className={classes.formRow} item xs={12}>
+							<TextField
+								className={classes.textField}
+								variant="outlined"
+								name="praenomen"
+								id="praenomen"
+								onChange={onTextFieldChange}
+								placeholder={'Gaius'}
+							/>
+						</Grid>
+						<Grid className={classes.formRow} item xs={12}>
+							<TextField
+								className={classes.textField}
+								variant="outlined"
+								name="nomen"
+								id="nomen"
+								onChange={onTextFieldChange}
+								placeholder={'Julius'}
+							/>
+						</Grid>
+
+						<Grid className={classes.formRow} item xs={12}>
+							<TextField
+								className={classes.textField}
+								variant="outlined"
+								name="prenomen"
+								id="prenomen"
+								onChange={onTextFieldChange}
+								placeholder={'Caesar'}
+							/>
+						</Grid>
+
+						<Grid className={classes.formRow} item xs={12}>
+							<TextField
+								onChange={onTextFieldChange}
+								className={classes.textField}
+								id="bio"
+								label="Bio"
+								multiline
+								rows={4}
+								defaultValue="Bio"
+								variant="outlined"
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<Grid container alignContent={'flex-start'}>
+								<TextField
+									id="birthDate"
+									label="emperor Date"
+									type="date"
+									onChange={onDateFieldChange}
+									defaultValue={addDays(Date.now(), 1)}
+									className={classes.textField}
+									InputLabelProps={{
+										shrink: true,
+									}}
+								/>
+							</Grid>
+							<Grid container alignContent={'flex-start'}>
+								<TextField
+									id="birthDate"
+									label="emperor Date"
+									type="date"
+									onChange={onDateFieldChange}
+									defaultValue={addDays(Date.now(), 1)}
+									className={classes.textField}
+									InputLabelProps={{
+										shrink: true,
+									}}
+								/>
+							</Grid>
+						</Grid>
+						<Grid className={classes.formRow} alignItems={'center'} item>
+							<Button onClick={handleSubmit}>
+								Add Emperor
+							</Button>
+							<Button type="button" onClick={onCreateDefaultEmperors}>
+								Create Defaults
+							</Button>
+						</Grid>
+					</Grid>
+				</form>
+			);
 		}
-
-    return (
-			<form onSubmit={handleSubmit} onChange={onFormChange}>
-				<Grid container className={classes.formGrid}>
-					<Grid className={classes.formRow} item xs={12}>
-						<TextField
-							className={classes.textField}
-							variant="outlined"
-							name="praenomen"
-							id="praenomen"
-							onChange={onTextFieldChange}
-							placeholder={'Gaius'}
-						/>
-					</Grid>
-					<Grid className={classes.formRow} item xs={12}>
-						<TextField
-							className={classes.textField}
-							variant="outlined"
-							name="nomen"
-							id="nomen"
-							onChange={onTextFieldChange}
-							placeholder={'Julius'}
-						/>
-					</Grid>
-
-					<Grid className={classes.formRow} item xs={12}>
-						<TextField
-							className={classes.textField}
-							variant="outlined"
-							name="prenomen"
-							id="prenomen"
-							onChange={onTextFieldChange}
-							placeholder={'Caesar'}
-						/>
-					</Grid>
-
-					<Grid className={classes.formRow} item xs={12}>
-						<TextField
-							onChange={onTextFieldChange}
-							className={classes.textField}
-							id="bio"
-							label="Bio"
-							multiline
-							rows={4}
-							defaultValue="Bio"
-							variant="outlined"
-						/>
-					</Grid>
-					<Grid item xs={12}>
-						<Grid container alignContent={'flex-start'}>
-							<TextField
-								id="birthDate"
-								label="emperor Date"
-								type="date"
-								onChange={onDateFieldChange}
-								defaultValue={addDays(Date.now(), 1)}
-								className={classes.textField}
-								InputLabelProps={{
-									shrink: true,
-								}}
-							/>
-						</Grid>
-						<Grid container alignContent={'flex-start'}>
-							<TextField
-								id="birthDate"
-								label="emperor Date"
-								type="date"
-								onChange={onDateFieldChange}
-								defaultValue={addDays(Date.now(), 1)}
-								className={classes.textField}
-								InputLabelProps={{
-									shrink: true,
-								}}
-							/>
-						</Grid>
-					</Grid>
-					<Grid className={classes.formRow} alignItems={'center'} item>
-						<Button type="submit">Add Emperor</Button>
-						<Button type="button" onClick={onCreateDefaultEmperors}>Create Defaults</Button>
-					</Grid>
-				</Grid>
-			</form>
-		);
-}

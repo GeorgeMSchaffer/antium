@@ -14,7 +14,7 @@ function UseReducerExample(props) {
 	}
 	function handleChange(evt) {
 		console.debug(' HANDLE SUBMIT', evt);
-		setName(evt.target.value);
+		setName( evt.target.value);
 	}
 	return (
 		<form onSubmit = {handleSubmit}>
