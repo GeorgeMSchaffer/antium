@@ -10,6 +10,7 @@ const Layout: FC = () => {
   return (
     <div>
       <button onClick={logout}>logout</button>
+      OUTLET HERE
       <Outlet />
     </div>
   )

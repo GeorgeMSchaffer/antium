@@ -6,7 +6,7 @@
     "prettier/@typescript-eslint"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["react-hooks", "@typescript-eslint"],
+  "plugins": ["react-hooks", "@typescript-eslint", "transform-object-rest-spread"],
   "env": {
     "browser": true,
     "node": true

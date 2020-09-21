@@ -39,7 +39,7 @@ export const getTodoList = (time: number) => {
   return async (dispatch: Dispatch) => {
     const response = await fakeFetchRemoteData(time)
     response.forEach(res => {
-      dispatch(addTodo(res))
+     //dispatch(addTodo(res))
     })
   }
 }

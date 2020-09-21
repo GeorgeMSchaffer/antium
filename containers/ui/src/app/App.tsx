@@ -8,16 +8,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AddEmperor from '../components/features/Emperors/AddEmperor';
 import '../App.css';
 import { Form } from '../demos/Form';
-import UseReducerExample from '../demos/UseReducerExample';
-import UseContextExample from '../demos/UseContextExample';
-‍import { UserContext, CompanyContext } from './appContexts'; 
-
-//import PictureCard from '../demos/PictureCard'
-//import Dashboard from '../demos/Dashboard/Dashboard';
-import React, { useContext } from 'react';
-‍
-const exportconst UserContext = React.createContext({});
-const CompanyContext = React.createContext({});
 
 const width = 240;
 const useStyles = makeStyles((theme: Theme) => {

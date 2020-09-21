@@ -1,5 +1,13 @@
 import { IEmperor } from './store/types'
 
+export interface Todo {
+  id: number
+  /** 内容 */
+  text: string
+  /** 完成状态 */
+  completed: boolean
+};
+
 export function fakeFetchRemoteData(time: number) {
   const data: IEmperor[] = [
     {
@@ -14,6 +22,7 @@ export function fakeFetchRemoteData(time: number) {
     }
   ]
   return new Promise<typeof data>(resolve => {
+    console.debug(' --- DATA ---');
     setTimeout(resolve, time, data)
   })
 }

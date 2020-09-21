@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction, Dispatch } from '@reduxjs/toolkit'
 import { fakeFetchRemoteData } from '../api'
 import { IEmperor } from './types';
+import { useDebugValue } from 'react';
 
 const initialState: IEmperor[] = [
   {
@@ -38,8 +39,8 @@ export default emperorsSlice.reducer
 export const getEmperorList = (time: number) => {
   return async (dispatch: Dispatch) => {
     const response = await fakeFetchRemoteData(time)
-    response.forEach(res => {
-      dispatch(addEmperor(res))
-    })
+    useDebugValue(response);
+    console.debug(` ---- GET EMPERORS LIST RESPONSE ----`,response);
+    return response;
   }
 }
