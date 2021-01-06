@@ -13,6 +13,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
+    "@types/mui-datatables": "^3.7.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
@@ -26,6 +27,7 @@
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0",
     "history": "^5.0.0",
+    "mui-datatables": "^3.7.4",
     "prettier": "^2.1.1",
     "react": "^16.13.1",
     "react-charts": "^2.0.0-beta.7",
@@ -61,6 +63,7 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.26.0"
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "react-context-devtool": "^2.0.0"
   }
 }

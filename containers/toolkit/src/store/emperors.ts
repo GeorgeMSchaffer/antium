@@ -32,14 +32,13 @@ const emperorsSlice = createSlice({
   }
 })
 
-export const { addEmperor, toggleEmperor } = emperorsSlice.actions 
+export const { addEmperor, toggleEmperor } = emperorsSlice.actions
 
 export default emperorsSlice.reducer
 
 export const getEmperorList = (time: number) => {
   return async (dispatch: Dispatch) => {
     const response = await fakeFetchRemoteData(time)
-    useDebugValue(response);
     console.debug(` ---- GET EMPERORS LIST RESPONSE ----`,response);
     return response;
   }

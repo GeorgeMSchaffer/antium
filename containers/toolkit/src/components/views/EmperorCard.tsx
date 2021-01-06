@@ -7,7 +7,7 @@ import {Card,CardContent,Paper,CardHeader,CardMedia, Typography } from '@materia
 
 interface IProps {
   emperor:IEmperor
-} 
+}
 interface IState {}
 
 export default function EmperorCard(props: IProps, state: IState): ReactElement {
