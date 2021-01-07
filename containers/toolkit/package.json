@@ -3,24 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "4.11.0",
-    "@material-ui/data-grid": "0.1.65",
-    "@material-ui/icons": "4.9.1",
-    "@material-ui/pickers": "^3.2.10",
-    "@material-ui/utils": "4.10.2",
+    "@material-ui/core": "3.",
     "@reduxjs/toolkit": "^1.4.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@types/datatables.net": "^1.10.19",
     "@types/jest": "^24.0.0",
     "@types/mui-datatables": "^3.7.0",
     "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.9",
+    "@types/react-table": "^7.0.26",
     "@types/webpack-env": "^1.15.2",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
     "@typescript-eslint/parser": "^3.10.1",
+    "datatables": "^1.10.18",
     "date-fns": "^2.16.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
@@ -36,7 +33,7 @@
     "react-query-devtools": "^2.4.7",
     "react-redux": "^7.2.1",
     "react-router-dom": "^6.0.0-beta.0",
-    "react-scripts": "3.4.3",
+    "react-scripts": "^3.4.4",
     "typescript": "~3.7.2"
   },
   "scripts": {
@@ -63,6 +60,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react": "^16.9.49",
+    "@types/react-dom": "^16.9.8",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "react-context-devtool": "^2.0.0"
   }

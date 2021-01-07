@@ -2,7 +2,7 @@ import { createSlice, PayloadAction, Dispatch } from '@reduxjs/toolkit'
 import { fakeFetchRemoteData } from '../api'
 import { IObjectScanResult } from './types';
 import { useDebugValue } from 'react';
-
+import {axios} from 'axios';
 
 const initialState: IObjectScanResult[] = [
   {

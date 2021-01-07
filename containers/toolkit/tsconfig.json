@@ -6,6 +6,7 @@
       "es6",
       "dom"
     ],
+    "typeRoots": [ "../node_modules/@types/" ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

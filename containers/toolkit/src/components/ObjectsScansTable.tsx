@@ -1,4 +1,12 @@
-import MUIDataTable from "mui-datatables";
+import React, { ReactElement, useDebugValue, useEffect } from "react";
+//import { getEmperorList } from '../../store/objectscans';
+import {
+  ExpandButton,
+  MUIDataTable,
+	MUIDataTableColumn,
+	MUIDataTableOptions,
+	MUIDataTableProps,
+} from "mui-datatables";
 
 const columns = [
  {
@@ -46,11 +54,20 @@ const options = {
   filterType: 'checkbox',
 };
 
-return (
-<MUIDataTable
-  title={"Employee List"}
-  data={data}
-  columns={columns}
-  options={options}
-  />
-)
+interface IProps {
+  data: (any)[];
+  options?: (MUIDataTableOptions);
+  title?: (string)
+}
+interface IState {}
+
+const ObjectsScansTable: React.FC = () => {
+  return (
+    <MUIDataTable
+      title={"Test"}
+      data={data}
+      columns={columns}
+    />
+  )
+};
+export default ObjectsScansTable;
