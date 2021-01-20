@@ -1,22 +1,35 @@
 import { createSlice, PayloadAction,AsyncThunkAction,createAsyncThunk,createAction,createReducer } from '@reduxjs/toolkit';
 import { useSelector,useDispatch } from 'react-redux';
 import { AppThunk, AppDispatch } from 'app/store'
-import { IDataDictionaryApplication } from 'features/types';
+import { IDataDictionaryApplication,IDataDictionaryDatabases } from 'features/types';
 import { getUrlParameter} from 'utils/request';
 import axios from 'axios';
+interface IState {
+	  applications: IDataDictionaryApplication[],
+		databases: IDataDictionaryDatabases[]
+}
 
-const initialState: IDataDictionaryApplication[] = [
-	{
-		"Id": 14,
-		"RowSts": "A",
-		"AppNam": "ADP",
-		"Domain": "CENTRAL",
-		"GrpPfx": "ITD",
-		"AppTyp": "C",
-		"LngNam": "ADP Interface",
-		"AppDsc": "ADP Interface"
-	},
-];
+const initialState = <IState> {
+	applications: [{
+			"Id": 14,
+			"RowSts": "A",
+			"AppNam": "ADP",
+			"Domain": "CENTRAL",
+			"GrpPfx": "ITD",
+			"AppTyp": "C",
+			"LngNam": "ADP Interface",
+			"AppDsc": "ADP Interface"
+		}],
+	databases: [{
+			Id: 1,
+			RowSts: 'A',
+			AppNam: 'ADP',
+			SrvNam: 'ADPEV5',
+			DbNam: 'String',
+			AppTyp: 'String'  
+	}]
+}
+
 
 const setObjectScans = createAction<IDataDictionaryApplication[]>('getDataDictionaryApplications')
 
@@ -28,7 +41,13 @@ const dataDictionarySlice = createSlice({
 
 			console.log('IN setDataDictionaryApplications, state passed', state)
 			console.log('action', action, 'action.payload', action.payload);
-			state.concat(action.payload);
+			state.applications.concat(action.payload);
+		},
+		setDataDictionaryDatabases(state, action: PayloadAction<IDataDictionaryDatabases>) {
+
+			console.log('IN setDataDictionaryApplications, state passed', state)
+			console.log('action', action, 'action.payload', action.payload);
+			state.databases.concat(action.payload);
 		},
 	},
 	extraReducers: (builder) => {

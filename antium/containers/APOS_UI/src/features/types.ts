@@ -28,12 +28,11 @@ export interface IDataDictionaryApplication {
   ,LngNam?: String
   ,AppDsc?: String
   }
-
 export interface IDataDictionaryDatabases{
   Id: Number
   RowSts: String
   AppNam: String
   SrvNam: String
-  DbNam?: String
-  AppTyp?: String    
+  DbNam: String
+  AppTyp: String    
   }
