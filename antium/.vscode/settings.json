@@ -1,0 +1,7 @@
+{
+	"svn.ignoreMissingSvnWarning": true,
+	"editor.tabSize": 2,
+	"editor.wordWrap": "wordWrapColumn",
+	"editor.wordWrapColumn": 120,
+	"editor.snippetSuggestions": "top"
+}
