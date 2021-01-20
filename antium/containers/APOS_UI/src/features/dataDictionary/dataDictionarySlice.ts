@@ -51,10 +51,12 @@ const dataDictionarySlice = createSlice({
 		},
 	},
 	extraReducers: (builder) => {
+		/*
 		builder.addCase(setObjectScans, (state, action) => {
 			console.log('ADD CASE Payload', action.payload, action.type);
 			return state.concat(action.payload);
 		})
+		*/
 	}
 });
 
