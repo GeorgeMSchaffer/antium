@@ -3,10 +3,12 @@ containers/rtk-todo/*
 # dependencies
 /node_modules
 /.pnp
+/.history
 .pnp.js
 **node_modules**
 **.history**
 /.history
+/.history/*
 # testing
 /coverage
 
